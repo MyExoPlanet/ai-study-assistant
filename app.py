@@ -1,4 +1,5 @@
 import streamlit as st
+from utils.pdf_reader import extract_text
 
 st.set_page_config(
     page_title="AI Study Assistant",
@@ -28,6 +29,12 @@ uploaded_file = st.file_uploader(
     "Upload a PDF",
     type=["pdf"]
 )
+if uploaded_file is not None:
+    text = extract_text(uploaded_file)
+
+    st.subheader("Extracted Text")
+
+    st.write(text)
 
 if uploaded_file:
     st.success(f"Uploaded: {uploaded_file.name}")
